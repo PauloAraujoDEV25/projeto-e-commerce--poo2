@@ -1,6 +1,7 @@
 package com.adacommerce.repository;
 
 import com.adacommerce.model.Produto;
+import com.adacommerce.model.StatusRegistro;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -15,6 +16,9 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
         if (produto.getId() == null) {
             produto.setId(idGenerator.getAndIncrement());
         }
+        if (produto.getStatus() == null) {
+            produto.setStatus(StatusRegistro.ATIVO);
+        }
         produtos.put(produto.getId(), produto);
         return produto;
     }
@@ -26,7 +30,9 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     
     @Override
     public List<Produto> listarTodos() {
-        return new ArrayList<>(produtos.values());
+        return produtos.values().stream()
+            .filter(Produto::isAtivo)
+            .collect(Collectors.toList());
     }
     
     @Override
@@ -41,6 +47,7 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     @Override
     public List<Produto> buscarPorNome(String nome) {
         return produtos.values().stream()
+            .filter(Produto::isAtivo)
             .filter(produto -> produto.getNome().toLowerCase().contains(nome.toLowerCase()))
             .collect(Collectors.toList());
     }

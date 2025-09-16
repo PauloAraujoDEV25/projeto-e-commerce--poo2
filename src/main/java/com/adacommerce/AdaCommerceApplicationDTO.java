@@ -11,9 +11,8 @@ public class AdaCommerceApplicationDTO {
     private static VendaControllerDTO vendaController;
     
     public static void main(String[] args) {
-        System.out.println("=== Ada Commerce - E-Commerce com DTOs ===");
+        System.out.println("=== Ada Commerce ===");
         System.out.println("Sistema de vendas online");
-        System.out.println("Versão com DTOs e Mappers para maior robustez");
         
         inicializarSistema();
         menuPrincipal();

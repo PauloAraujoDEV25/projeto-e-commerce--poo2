@@ -38,8 +38,7 @@ public class AdaCommerceAppDTO {
     
     public void executar() {
         System.out.println("===============================================");
-        System.out.println("  BEM-VINDO AO ADA COMMERCE E-COMMERCE v2.0");
-        System.out.println("        (Versão com DTOs e Mappers)");
+        System.out.println("  BEM-VINDO AO ADA COMMERCE E-COMMERCE");
         System.out.println("===============================================");
         
         while (true) {

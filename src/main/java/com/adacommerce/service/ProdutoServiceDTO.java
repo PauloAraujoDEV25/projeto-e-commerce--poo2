@@ -69,4 +69,18 @@ public class ProdutoServiceDTO {
             throw new IllegalArgumentException("Valor do produto deve ser maior que zero");
         }
     }
+
+    public void inativar(Long id) {
+        Produto produto = produtoRepository.buscarPorId(id)
+            .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
+        produto.inativar();
+        produtoRepository.atualizar(produto);
+    }
+
+    public void ativar(Long id) {
+        Produto produto = produtoRepository.buscarPorId(id)
+            .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
+        produto.ativar();
+        produtoRepository.atualizar(produto);
+    }
 }

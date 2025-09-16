@@ -8,6 +8,7 @@ public class Produto {
     private String nome;
     private String etiqueta;
     private BigDecimal valorProduto;
+    private StatusRegistro status = StatusRegistro.ATIVO;
     
     public Produto() {}
     
@@ -16,6 +17,7 @@ public class Produto {
         this.nome = nome;
         this.etiqueta = etiqueta;
         this.valorProduto = valorProduto;
+        this.status = StatusRegistro.ATIVO;
     }
     
     // Getters e Setters
@@ -51,6 +53,26 @@ public class Produto {
         this.valorProduto = valorProduto;
     }
     
+    public StatusRegistro getStatus() {
+        return status;
+    }
+    
+    public void setStatus(StatusRegistro status) {
+        this.status = status;
+    }
+    
+    public boolean isAtivo() {
+        return this.status == StatusRegistro.ATIVO;
+    }
+    
+    public void ativar() {
+        this.status = StatusRegistro.ATIVO;
+    }
+    
+    public void inativar() {
+        this.status = StatusRegistro.INATIVO;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +92,8 @@ public class Produto {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", etiqueta='" + etiqueta + '\'' +
-                ", valorProduto=" + valorProduto +
+        ", valorProduto=" + valorProduto +
+        ", status=" + status +
                 '}';
     }
 }

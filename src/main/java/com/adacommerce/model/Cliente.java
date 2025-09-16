@@ -7,6 +7,8 @@ public class Cliente {
     private String nome;
     private String documento;
     private String email;
+    private StatusRegistro status = StatusRegistro.ATIVO;
+    private TipoDocumento tipoDocumento = TipoDocumento.CPF;
     
     public Cliente() {}
     
@@ -15,6 +17,8 @@ public class Cliente {
         this.nome = nome;
         this.documento = documento;
         this.email = email;
+        this.status = StatusRegistro.ATIVO;
+        this.tipoDocumento = TipoDocumento.CPF;
     }
     
     // Getters e Setters
@@ -50,6 +54,34 @@ public class Cliente {
         this.email = email;
     }
     
+    public TipoDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+    
+    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+    
+    public StatusRegistro getStatus() {
+        return status;
+    }
+    
+    public void setStatus(StatusRegistro status) {
+        this.status = status;
+    }
+    
+    public boolean isAtivo() {
+        return this.status == StatusRegistro.ATIVO;
+    }
+    
+    public void ativar() {
+        this.status = StatusRegistro.ATIVO;
+    }
+    
+    public void inativar() {
+        this.status = StatusRegistro.INATIVO;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +101,9 @@ public class Cliente {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", documento='" + documento + '\'' +
-                ", email='" + email + '\'' +
+        ", email='" + email + '\'' +
+        ", status=" + status +
+        ", tipoDocumento=" + tipoDocumento +
                 '}';
     }
 }

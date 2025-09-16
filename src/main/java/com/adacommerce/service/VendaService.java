@@ -29,6 +29,9 @@ public class VendaService {
         if (cliente.isEmpty()) {
             throw new IllegalArgumentException("Cliente não encontrado com ID: " + clienteId);
         }
+        if (!cliente.get().isAtivo()) {
+            throw new IllegalStateException("Cliente inativo não pode iniciar venda");
+        }
         
         Venda venda = new Venda();
         venda.setCliente(cliente.get());
@@ -39,6 +42,9 @@ public class VendaService {
     public void adicionarItem(Long vendaId, Long produtoId, Integer quantidade, BigDecimal valorVenda) {
         Venda venda = buscarVendaPorId(vendaId);
         Produto produto = buscarProdutoPorId(produtoId);
+        if (!produto.isAtivo()) {
+            throw new IllegalStateException("Produto inativo não pode ser adicionado à venda");
+        }
         
         validarQuantidade(quantidade);
         validarValorVenda(valorVenda);

@@ -2,7 +2,6 @@ package com.adacommerce.controller;
 
 import com.adacommerce.model.Cliente;
 import com.adacommerce.service.ClienteService;
-import com.adacommerce.util.InputUtil;
 import java.util.List;
 import java.util.Optional;
 
