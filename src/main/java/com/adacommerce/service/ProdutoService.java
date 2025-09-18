@@ -51,6 +51,14 @@ public class ProdutoService {
     public List<Produto> buscarPorNome(String nome) {
         return produtoRepository.buscarPorNome(nome);
     }
+
+    /**
+     * Retorna produtos (ativos e inativos) para pesquisa por nome.
+     * A responsabilidade de mostrar diferenciação visual fica no controller.
+     */
+    public List<Produto> buscarPorNomeInclusivo(String nome) {
+        return produtoRepository.buscarPorNome(nome); // já inclui inativos agora
+    }
     
     private void validarDadosProduto(String nome, String etiqueta, BigDecimal valorProduto) {
         if (nome == null || nome.trim().isEmpty()) {

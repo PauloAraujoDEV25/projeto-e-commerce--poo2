@@ -49,6 +49,9 @@ public class ClienteControllerDTO {
                 System.out.println("Nome: " + cliente.getNome());
                 System.out.println("Documento: " + cliente.getDocumento());
                 System.out.println("E-mail: " + cliente.getEmail());
+                if (cliente.getStatus() != null && !"ATIVO".equals(cliente.getStatus())) {
+                    System.out.println("Status: " + cliente.getStatus());
+                }
                 System.out.println("---");
             });
             
@@ -66,7 +69,8 @@ public class ClienteControllerDTO {
             
             if (cliente.isPresent()) {
                 System.out.println("Cliente encontrado:");
-                System.out.println(cliente.get());
+                ClienteDTO c = cliente.get();
+                System.out.println(c + (c.getStatus() != null && !"ATIVO".equals(c.getStatus()) ? " [INATIVO]" : ""));
             } else {
                 System.out.println("Cliente não encontrado com ID: " + id);
             }
@@ -85,7 +89,8 @@ public class ClienteControllerDTO {
             
             if (cliente.isPresent()) {
                 System.out.println("Cliente encontrado:");
-                System.out.println(cliente.get());
+                ClienteDTO c = cliente.get();
+                System.out.println(c + (c.getStatus() != null && !"ATIVO".equals(c.getStatus()) ? " [INATIVO]" : ""));
             } else {
                 System.out.println("Cliente não encontrado com documento: " + documento);
             }

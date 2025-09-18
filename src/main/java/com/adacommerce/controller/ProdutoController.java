@@ -87,11 +87,13 @@ public class ProdutoController {
         System.out.print("Nome (ou parte do nome): ");
         String nome = System.console().readLine();
         
-        List<Produto> produtos = produtoService.buscarPorNome(nome);
+        // Usa busca inclusiva (ativos e inativos) para consulta
+        List<Produto> produtos = produtoService.buscarPorNomeInclusivo(nome);
         if (!produtos.isEmpty()) {
             System.out.println("Produtos encontrados:");
             for (Produto produto : produtos) {
-                System.out.println(produto);
+                String marker = produto.isAtivo() ? "" : " [INATIVO]";
+                System.out.println(produto + marker);
             }
         } else {
             System.out.println("Nenhum produto encontrado com nome: " + nome);

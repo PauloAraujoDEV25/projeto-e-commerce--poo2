@@ -89,7 +89,9 @@ public class ClienteController {
         Optional<Cliente> cliente = clienteService.buscarPorDocumento(documento);
         if (cliente.isPresent()) {
             System.out.println("Cliente encontrado:");
-            System.out.println(cliente.get());
+            Cliente c = cliente.get();
+            String marker = c.isAtivo() ? "" : " [INATIVO]";
+            System.out.println(c + marker);
         } else {
             System.out.println("Cliente não encontrado com documento: " + documento);
         }

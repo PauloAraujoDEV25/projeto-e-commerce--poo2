@@ -95,6 +95,9 @@ public class ProdutoControllerDTO {
                 System.out.println("Nome: " + produto.getNome());
                 System.out.println("Etiqueta: " + produto.getEtiqueta());
                 System.out.println("Valor: R$ " + produto.getValorProduto());
+                if (produto.getStatus() != null && !"ATIVO".equals(produto.getStatus())) {
+                    System.out.println("Status: " + produto.getStatus());
+                }
                 System.out.println("---");
             });
             

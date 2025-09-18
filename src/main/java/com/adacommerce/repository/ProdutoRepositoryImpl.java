@@ -47,7 +47,6 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     @Override
     public List<Produto> buscarPorNome(String nome) {
         return produtos.values().stream()
-            .filter(Produto::isAtivo)
             .filter(produto -> produto.getNome().toLowerCase().contains(nome.toLowerCase()))
             .collect(Collectors.toList());
     }

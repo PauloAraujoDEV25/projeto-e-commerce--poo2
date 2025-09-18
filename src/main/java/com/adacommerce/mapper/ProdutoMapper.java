@@ -15,7 +15,8 @@ public class ProdutoMapper {
             produto.getId(),
             produto.getNome(),
             produto.getEtiqueta(),
-            produto.getValorProduto()
+            produto.getValorProduto(),
+            produto.getStatus() != null ? produto.getStatus().name() : null
         );
     }
     
