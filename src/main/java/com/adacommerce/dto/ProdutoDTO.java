@@ -7,7 +7,6 @@ public class ProdutoDTO {
     private String nome;
     private String etiqueta;
     private BigDecimal valorProduto;
-    private String status; // ATIVO / INATIVO
     
     public ProdutoDTO() {}
     
@@ -16,10 +15,6 @@ public class ProdutoDTO {
         this.nome = nome;
         this.etiqueta = etiqueta;
         this.valorProduto = valorProduto;
-    }
-    public ProdutoDTO(Long id, String nome, String etiqueta, BigDecimal valorProduto, String status) {
-        this(id, nome, etiqueta, valorProduto);
-        this.status = status;
     }
     
     // Getters e Setters
@@ -55,21 +50,13 @@ public class ProdutoDTO {
         this.valorProduto = valorProduto;
     }
     
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
     @Override
     public String toString() {
         return "ProdutoDTO{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", etiqueta='" + etiqueta + '\'' +
-        ", valorProduto=" + valorProduto +
-        ", status=" + status +
+                ", valorProduto=" + valorProduto +
                 '}';
     }
 }

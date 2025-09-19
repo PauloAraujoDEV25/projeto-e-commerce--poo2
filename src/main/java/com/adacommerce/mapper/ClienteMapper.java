@@ -15,8 +15,7 @@ public class ClienteMapper {
             cliente.getId(),
             cliente.getNome(),
             cliente.getDocumento(),
-            cliente.getEmail(),
-            cliente.getStatus() != null ? cliente.getStatus().name() : null
+            cliente.getEmail()
         );
     }
     

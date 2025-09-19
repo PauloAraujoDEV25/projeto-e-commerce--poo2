@@ -1,11 +1,9 @@
 package com.adacommerce.repository;
 
 import com.adacommerce.model.Cliente;
-import com.adacommerce.model.StatusRegistro;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
 
 public class ClienteRepositoryImpl implements ClienteRepository {
     private final Map<Long, Cliente> clientes = new ConcurrentHashMap<>();
@@ -22,9 +20,6 @@ public class ClienteRepositoryImpl implements ClienteRepository {
             throw new IllegalArgumentException("Já existe um cliente com o documento: " + cliente.getDocumento());
         }
         
-        if (cliente.getStatus() == null) {
-            cliente.setStatus(StatusRegistro.ATIVO);
-        }
         clientes.put(cliente.getId(), cliente);
         return cliente;
     }
@@ -43,9 +38,7 @@ public class ClienteRepositoryImpl implements ClienteRepository {
     
     @Override
     public List<Cliente> listarTodos() {
-        return clientes.values().stream()
-            .filter(Cliente::isAtivo)
-            .collect(Collectors.toList());
+        return new ArrayList<>(clientes.values());
     }
     
     @Override

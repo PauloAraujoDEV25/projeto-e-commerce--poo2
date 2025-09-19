@@ -95,9 +95,6 @@ public class ProdutoControllerDTO {
                 System.out.println("Nome: " + produto.getNome());
                 System.out.println("Etiqueta: " + produto.getEtiqueta());
                 System.out.println("Valor: R$ " + produto.getValorProduto());
-                if (produto.getStatus() != null && !"ATIVO".equals(produto.getStatus())) {
-                    System.out.println("Status: " + produto.getStatus());
-                }
                 System.out.println("---");
             });
             
@@ -146,8 +143,6 @@ public class ProdutoControllerDTO {
             System.out.println("3. Buscar por ID");
             System.out.println("4. Buscar por Nome");
             System.out.println("5. Atualizar Produto");
-            System.out.println("6. Inativar Produto");
-            System.out.println("7. Ativar Produto");
             System.out.println("0. Voltar");
             
             opcao = InputUtil.lerInt("Escolha uma opção: ");
@@ -168,12 +163,6 @@ public class ProdutoControllerDTO {
                 case 5:
                     atualizarProduto();
                     break;
-                case 6:
-                    inativarProduto();
-                    break;
-                case 7:
-                    ativarProduto();
-                    break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
                     break;
@@ -181,27 +170,5 @@ public class ProdutoControllerDTO {
                     System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
-    }
-
-    private void inativarProduto() {
-        try {
-            System.out.println("=== Inativar Produto ===");
-            Long id = InputUtil.lerLong("ID do produto: ");
-            produtoService.inativar(id);
-            System.out.println("Produto inativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao inativar produto: " + e.getMessage());
-        }
-    }
-
-    private void ativarProduto() {
-        try {
-            System.out.println("=== Ativar Produto ===");
-            Long id = InputUtil.lerLong("ID do produto: ");
-            produtoService.ativar(id);
-            System.out.println("Produto ativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao ativar produto: " + e.getMessage());
-        }
     }
 }

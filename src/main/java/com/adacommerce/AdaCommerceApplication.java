@@ -74,8 +74,6 @@ public class AdaCommerceApplication {
             System.out.println("2. Listar Clientes");
             System.out.println("3. Atualizar Cliente");
             System.out.println("4. Buscar Cliente por Documento");
-            System.out.println("5. Inativar Cliente");
-            System.out.println("6. Ativar Cliente");
             System.out.println("0. Voltar ao Menu Principal");
             
             int opcao = InputUtil.lerInt("Escolha uma opção: ");
@@ -93,12 +91,6 @@ public class AdaCommerceApplication {
                 case 4:
                     buscarClientePorDocumento();
                     break;
-                case 5:
-                    inativarCliente();
-                    break;
-                case 6:
-                    ativarCliente();
-                    break;
                 case 0:
                     return;
                 default:
@@ -114,8 +106,6 @@ public class AdaCommerceApplication {
             System.out.println("2. Listar Produtos");
             System.out.println("3. Atualizar Produto");
             System.out.println("4. Buscar Produto por Nome");
-            System.out.println("5. Inativar Produto");
-            System.out.println("6. Ativar Produto");
             System.out.println("0. Voltar ao Menu Principal");
             
             int opcao = InputUtil.lerInt("Escolha uma opção: ");
@@ -132,12 +122,6 @@ public class AdaCommerceApplication {
                     break;
                 case 4:
                     buscarProdutoPorNome();
-                    break;
-                case 5:
-                    inativarProduto();
-                    break;
-                case 6:
-                    ativarProduto();
                     break;
                 case 0:
                     return;
@@ -207,7 +191,7 @@ public class AdaCommerceApplication {
     private void cadastrarCliente() {
         System.out.println("\n=== CADASTRAR CLIENTE ===");
         String nome = InputUtil.lerString("Nome: ");
-    String documento = InputUtil.lerString("Documento (CPF - 11 dígitos, somente números ou com máscara): ");
+        String documento = InputUtil.lerString("Documento: ");
         String email = InputUtil.lerString("Email: ");
         
         try {
@@ -222,7 +206,7 @@ public class AdaCommerceApplication {
         System.out.println("\n=== ATUALIZAR CLIENTE ===");
         long id = InputUtil.lerLong("ID do cliente: ");
         String nome = InputUtil.lerString("Novo nome: ");
-    String documento = InputUtil.lerString("Novo documento (CPF - 11 dígitos): ");
+        String documento = InputUtil.lerString("Novo documento: ");
         String email = InputUtil.lerString("Novo email: ");
         
         try {
@@ -235,34 +219,12 @@ public class AdaCommerceApplication {
     
     private void buscarClientePorDocumento() {
         System.out.println("\n=== BUSCAR CLIENTE POR DOCUMENTO ===");
-    String documento = InputUtil.lerString("Documento (CPF - 11 dígitos): ");
+        String documento = InputUtil.lerString("Documento: ");
         clienteController.getClienteService().buscarPorDocumento(documento)
             .ifPresentOrElse(
                 cliente -> System.out.println("Cliente encontrado: " + cliente),
                 () -> System.out.println("Cliente não encontrado.")
             );
-    }
-
-    private void inativarCliente() {
-        System.out.println("\n=== INATIVAR CLIENTE ===");
-        long id = InputUtil.lerLong("ID do cliente: ");
-        try {
-            clienteController.getClienteService().inativar(id);
-            System.out.println("Cliente inativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao inativar cliente: " + e.getMessage());
-        }
-    }
-
-    private void ativarCliente() {
-        System.out.println("\n=== ATIVAR CLIENTE ===");
-        long id = InputUtil.lerLong("ID do cliente: ");
-        try {
-            clienteController.getClienteService().ativar(id);
-            System.out.println("Cliente ativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao ativar cliente: " + e.getMessage());
-        }
     }
     
     private void cadastrarProduto() {
@@ -298,28 +260,6 @@ public class AdaCommerceApplication {
         System.out.println("\n=== BUSCAR PRODUTO POR NOME ===");
         String nome = InputUtil.lerString("Nome (ou parte do nome): ");
         produtoController.getProdutoService().buscarPorNome(nome).forEach(System.out::println);
-    }
-
-    private void inativarProduto() {
-        System.out.println("\n=== INATIVAR PRODUTO ===");
-        long id = InputUtil.lerLong("ID do produto: ");
-        try {
-            produtoController.getProdutoService().inativar(id);
-            System.out.println("Produto inativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao inativar produto: " + e.getMessage());
-        }
-    }
-
-    private void ativarProduto() {
-        System.out.println("\n=== ATIVAR PRODUTO ===");
-        long id = InputUtil.lerLong("ID do produto: ");
-        try {
-            produtoController.getProdutoService().ativar(id);
-            System.out.println("Produto ativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao ativar produto: " + e.getMessage());
-        }
     }
     
     private void criarVenda() {

@@ -1,6 +1,7 @@
 package com.adacommerce.service;
 
 import com.adacommerce.model.Produto;
+import com.adacommerce.model.StatusRegistro;
 import com.adacommerce.repository.ProdutoRepository;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +26,10 @@ public class ProdutoService {
     }
     
     public List<Produto> listar() {
-        return produtoRepository.listarTodos();
+        // Retorna apenas ativos por padrão
+        return produtoRepository.listarTodos().stream()
+                .filter(Produto::isAtivo)
+                .toList();
     }
     
     public Produto atualizar(Long id, String nome, String etiqueta, BigDecimal valorProduto) {
@@ -49,15 +53,33 @@ public class ProdutoService {
     }
     
     public List<Produto> buscarPorNome(String nome) {
-        return produtoRepository.buscarPorNome(nome);
+        return produtoRepository.buscarPorNome(nome).stream()
+                .filter(Produto::isAtivo)
+                .toList();
     }
 
-    /**
-     * Retorna produtos (ativos e inativos) para pesquisa por nome.
-     * A responsabilidade de mostrar diferenciação visual fica no controller.
-     */
-    public List<Produto> buscarPorNomeInclusivo(String nome) {
-        return produtoRepository.buscarPorNome(nome); // já inclui inativos agora
+    public List<Produto> listarTodosIncluindoInativos() {
+        return produtoRepository.listarTodos();
+    }
+
+    public void inativar(Long id) {
+        Produto produto = produtoRepository.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
+        if (!produto.isAtivo()) {
+            return; // já inativo
+        }
+        produto.setStatus(StatusRegistro.INATIVO);
+        produtoRepository.atualizar(produto);
+    }
+
+    public void reativar(Long id) {
+        Produto produto = produtoRepository.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
+        if (produto.isAtivo()) {
+            return; // já ativo
+        }
+        produto.setStatus(StatusRegistro.ATIVO);
+        produtoRepository.atualizar(produto);
     }
     
     private void validarDadosProduto(String nome, String etiqueta, BigDecimal valorProduto) {
@@ -70,19 +92,5 @@ public class ProdutoService {
         if (valorProduto == null || valorProduto.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor do produto deve ser maior que zero");
         }
-    }
-
-    public void inativar(Long id) {
-        Produto produto = produtoRepository.buscarPorId(id)
-            .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
-        produto.inativar();
-        produtoRepository.atualizar(produto);
-    }
-
-    public void ativar(Long id) {
-        Produto produto = produtoRepository.buscarPorId(id)
-            .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado com ID: " + id));
-        produto.ativar();
-        produtoRepository.atualizar(produto);
     }
 }

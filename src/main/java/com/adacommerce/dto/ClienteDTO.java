@@ -5,7 +5,6 @@ public class ClienteDTO {
     private String nome;
     private String documento;
     private String email;
-    private String status; // ATIVO / INATIVO
     
     public ClienteDTO() {}
     
@@ -14,10 +13,6 @@ public class ClienteDTO {
         this.nome = nome;
         this.documento = documento;
         this.email = email;
-    }
-    public ClienteDTO(Long id, String nome, String documento, String email, String status) {
-        this(id, nome, documento, email);
-        this.status = status;
     }
     
     // Getters e Setters
@@ -52,8 +47,6 @@ public class ClienteDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
     
     @Override
     public String toString() {
@@ -61,8 +54,7 @@ public class ClienteDTO {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", documento='" + documento + '\'' +
-        ", email='" + email + '\'' +
-        ", status=" + status +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

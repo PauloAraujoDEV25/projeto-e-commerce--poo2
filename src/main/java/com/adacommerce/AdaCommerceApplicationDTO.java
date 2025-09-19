@@ -45,7 +45,7 @@ public class AdaCommerceApplicationDTO {
     private static void menuPrincipal() {
         int opcao;
         do {
-            System.out.println("\n=== MENU PRINCIPAL - Ada Commerce DTO ===");
+            System.out.println("\n=== Menu Ada Commerce ===");
             System.out.println("1. Gerenciar Clientes");
             System.out.println("2. Gerenciar Produtos");
             System.out.println("3. Gerenciar Vendas");

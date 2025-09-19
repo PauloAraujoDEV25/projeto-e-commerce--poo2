@@ -19,7 +19,7 @@ public class ClienteControllerDTO {
             System.out.println("=== Cadastrar Cliente ===");
             
             String nome = InputUtil.lerString("Nome: ");
-            String documento = InputUtil.lerString("Documento (CPF - 11 dígitos): ");
+            String documento = InputUtil.lerString("Documento: ");
             String email = InputUtil.lerString("E-mail: ");
             
             ClienteRequestDTO clienteRequestDTO = new ClienteRequestDTO(nome, documento, email);
@@ -49,9 +49,6 @@ public class ClienteControllerDTO {
                 System.out.println("Nome: " + cliente.getNome());
                 System.out.println("Documento: " + cliente.getDocumento());
                 System.out.println("E-mail: " + cliente.getEmail());
-                if (cliente.getStatus() != null && !"ATIVO".equals(cliente.getStatus())) {
-                    System.out.println("Status: " + cliente.getStatus());
-                }
                 System.out.println("---");
             });
             
@@ -69,8 +66,7 @@ public class ClienteControllerDTO {
             
             if (cliente.isPresent()) {
                 System.out.println("Cliente encontrado:");
-                ClienteDTO c = cliente.get();
-                System.out.println(c + (c.getStatus() != null && !"ATIVO".equals(c.getStatus()) ? " [INATIVO]" : ""));
+                System.out.println(cliente.get());
             } else {
                 System.out.println("Cliente não encontrado com ID: " + id);
             }
@@ -84,13 +80,12 @@ public class ClienteControllerDTO {
         try {
             System.out.println("=== Buscar Cliente por Documento ===");
             
-            String documento = InputUtil.lerString("Documento (CPF - 11 dígitos): ");
+            String documento = InputUtil.lerString("Documento: ");
             Optional<ClienteDTO> cliente = clienteService.buscarPorDocumento(documento);
             
             if (cliente.isPresent()) {
                 System.out.println("Cliente encontrado:");
-                ClienteDTO c = cliente.get();
-                System.out.println(c + (c.getStatus() != null && !"ATIVO".equals(c.getStatus()) ? " [INATIVO]" : ""));
+                System.out.println(cliente.get());
             } else {
                 System.out.println("Cliente não encontrado com documento: " + documento);
             }
@@ -140,8 +135,6 @@ public class ClienteControllerDTO {
             System.out.println("3. Buscar por ID");
             System.out.println("4. Buscar por Documento");
             System.out.println("5. Atualizar Cliente");
-            System.out.println("6. Inativar Cliente");
-            System.out.println("7. Ativar Cliente");
             System.out.println("0. Voltar");
             
             opcao = InputUtil.lerInt("Escolha uma opção: ");
@@ -162,12 +155,6 @@ public class ClienteControllerDTO {
                 case 5:
                     atualizarCliente();
                     break;
-                case 6:
-                    inativarCliente();
-                    break;
-                case 7:
-                    ativarCliente();
-                    break;
                 case 0:
                     System.out.println("Voltando ao menu principal...");
                     break;
@@ -175,27 +162,5 @@ public class ClienteControllerDTO {
                     System.out.println("Opção inválida!");
             }
         } while (opcao != 0);
-    }
-
-    private void inativarCliente() {
-        try {
-            System.out.println("=== Inativar Cliente ===");
-            Long id = InputUtil.lerLong("ID do cliente: ");
-            clienteService.inativar(id);
-            System.out.println("Cliente inativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao inativar cliente: " + e.getMessage());
-        }
-    }
-
-    private void ativarCliente() {
-        try {
-            System.out.println("=== Ativar Cliente ===");
-            Long id = InputUtil.lerLong("ID do cliente: ");
-            clienteService.ativar(id);
-            System.out.println("Cliente ativado com sucesso!");
-        } catch (Exception e) {
-            System.err.println("Erro ao ativar cliente: " + e.getMessage());
-        }
     }
 }

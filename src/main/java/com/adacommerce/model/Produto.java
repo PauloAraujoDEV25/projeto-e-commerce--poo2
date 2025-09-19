@@ -52,25 +52,17 @@ public class Produto {
     public void setValorProduto(BigDecimal valorProduto) {
         this.valorProduto = valorProduto;
     }
-    
+
     public StatusRegistro getStatus() {
         return status;
     }
-    
+
     public void setStatus(StatusRegistro status) {
         this.status = status;
     }
-    
+
     public boolean isAtivo() {
-        return this.status == StatusRegistro.ATIVO;
-    }
-    
-    public void ativar() {
-        this.status = StatusRegistro.ATIVO;
-    }
-    
-    public void inativar() {
-        this.status = StatusRegistro.INATIVO;
+        return status != null && status.isAtivo();
     }
     
     @Override
@@ -92,8 +84,7 @@ public class Produto {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", etiqueta='" + etiqueta + '\'' +
-        ", valorProduto=" + valorProduto +
-        ", status=" + status +
+                ", valorProduto=" + valorProduto +
                 '}';
     }
 }

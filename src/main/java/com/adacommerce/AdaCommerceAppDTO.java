@@ -33,7 +33,7 @@ public class AdaCommerceAppDTO {
         this.vendaController = new VendaControllerDTO(vendaService, clienteService, produtoService);
         
         // Carregar dados de exemplo
-        carregarDadosExemplo(clienteService, produtoService);
+        //CarregarDadosExemplo(clienteService, produtoService);
     }
     
     public void executar() {

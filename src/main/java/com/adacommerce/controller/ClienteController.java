@@ -2,6 +2,7 @@ package com.adacommerce.controller;
 
 import com.adacommerce.model.Cliente;
 import com.adacommerce.service.ClienteService;
+import com.adacommerce.util.InputUtil;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,9 +90,7 @@ public class ClienteController {
         Optional<Cliente> cliente = clienteService.buscarPorDocumento(documento);
         if (cliente.isPresent()) {
             System.out.println("Cliente encontrado:");
-            Cliente c = cliente.get();
-            String marker = c.isAtivo() ? "" : " [INATIVO]";
-            System.out.println(c + marker);
+            System.out.println(cliente.get());
         } else {
             System.out.println("Cliente não encontrado com documento: " + documento);
         }
